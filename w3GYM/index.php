@@ -66,7 +66,10 @@ session_start();
     <!-- naglagay me partners/sponsors-->
     <section class ="Partners" id ="partners">
         <h2>Our Parners</h2>
+    </section>
 
+    <section class = "Contacts" id ="contact">
+        <h2>Contacts</h2>
     </section>
 
 </body>
