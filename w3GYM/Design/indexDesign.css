@@ -1,0 +1,154 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #92140c;
+}
+
+/* Navbar */
+nav {
+    background-color: #333;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    margin: 0 10px;
+}
+
+nav a:hover {
+    background-color: #92140c;
+}
+
+/* Home */
+.home-section {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.home-section h2 {
+    color: #333;
+    font-size: 2.5rem;
+}
+
+.About {
+    padding-left: 250px;
+}
+
+.pricing-plans {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.pricing-plan {
+    background-color: #f76f;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    text-align: center;
+}
+
+.pricing-plan h3 {
+    color: #333;
+}
+
+.pricing-plan p {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+.price {
+    font-size: 2rem;
+    color: #333;
+    font-weight: bold;
+}
+
+.Partners {
+    display: flex;
+    justify-content: center;
+}
+
+.button {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.button:hover {
+    background-color: #92140c;
+}
+
+.Contacts {
+    display: flex;
+    justify-content: center;
+}
+/* Login Container and Box */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+
+.form-box {
+    background-color: white;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 250px;
+    text-align: center;
+    animation: popIn 0.5s ease-in-out;
+}
+
+/* Pop-in animation */
+@keyframes popIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.error {
+    color: red;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
