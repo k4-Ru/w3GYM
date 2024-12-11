@@ -152,7 +152,7 @@ h1{
 }
 
 .DATA button {
-    background-color: #f44336; /* Red for Delete */
+    background-color: #f44336; 
     color: white;
     border: none;
     padding: 5px 10px;
@@ -193,18 +193,15 @@ h1{
    color: #4CAF50; 
 }
 
-.status.Inactive {
-    color: #FFC107; 
-}
 .status.Disabled {
     color: #F44336; 
 }
 
 .error-message {
-    color: #F44336; /* Red color for error */
+    color: #F44336; 
     padding: 10px;
     border-radius: 5px;
-    margin-top: 20px; /* Space from the form */
+    margin-top: 20px; 
     text-align: center;
 }
 

@@ -22,6 +22,7 @@ if (!empty($search)) {
               OR username LIKE :search 
               OR email LIKE :search 
               OR phone LIKE :search 
+              OR status LIKE :search
               OR membership_type LIKE :search";
     $params[':search'] = '%' . $search . '%';
 }
@@ -43,7 +44,6 @@ $members = $stmt->fetchAll();
 
     <nav>
         <div class="nav-content">
-            
             <a href="list_admins.php">Admins</a>
             <a href="new_admin.php">New Admin</a>
             <a href="admin_login.php">Logout</a>  
@@ -107,7 +107,7 @@ $members = $stmt->fetchAll();
                                 <td><?php echo htmlspecialchars($member['updated_at']); ?></td>
 
                                 <td>
-                                    <form action="delete_member.php" method="POST" style="display:inline;">
+                                <form action="delete_member.php" method="POST" style="display:inline;">
                                         <input type="hidden" name="member_id" value="<?php echo $member['id']; ?>">
                                         <button type="submit" onclick="return confirm('Are you sure you want to delete this member?');">Delete</button>
                                     </form>
