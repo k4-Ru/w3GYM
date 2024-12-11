@@ -23,10 +23,9 @@ session_start();
         <a href="admin_login.php">Admin</a>
     </nav>
 
-    <!-- Home -->
-    <section class="home-section" id="home">
-        <h2>w3GYM</h2>
-        <p>Where. We. Win</p>
+    <!-- banner -->
+    <section class="banner" id="home">
+            <img src="assets/w3GYM_Banner.svg">
     </section>
 
     <!-- about section -->

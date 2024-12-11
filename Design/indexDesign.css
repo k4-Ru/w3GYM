@@ -3,14 +3,17 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #92140c;
+    background-color: #FFF8F0;
+    display: flex;
 }
 
 /* Navbar */
 nav {
+    position: fixed;
     background-color: #333;
     padding: 10px 20px;
     text-align: center;
+    width: 100%;
 }
 
 nav a {
@@ -24,16 +27,13 @@ nav a:hover {
     background-color: #92140c;
 }
 
-/* Home */
-.home-section {
-    padding: 50px 20px;
-    text-align: center;
+/*banner*/
+.banner {
+    
+    height: 100px;
+
 }
 
-.home-section h2 {
-    color: #333;
-    font-size: 2.5rem;
-}
 
 .About {
     padding-left: 250px;
