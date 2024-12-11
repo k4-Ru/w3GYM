@@ -24,35 +24,40 @@ session_start();
     </nav>
 
     <!-- banner -->
-    <section class="banner" id="home">
-            <img src="assets/w3GYM_Banner.svg">
-    </section>
+    <div id="home">
+            <img src="assets/w3GYM_Banner.png" class="banner">
+    </div>
+
+    <div class="divider"> </div>
 
     <!-- about section -->
     <section class="About" id="about">
-        <h2>About</h2>
-        <p>mga tungkol sa gym</p>
+        <div>
+           <h2>About</h2>
+        <p>mga tungkol sa gym</p> 
+        </div>
+        
     </section>
 
     <!-- Pricing  -->
-    <section class="home-section" id="pricing">
-        <h2>Our Pricing Plans</h2>
-        <div class="pricing-plans">
-            <!-- Plan 1 -->
+    <section class="price-section" id="pricing">
+    <h2>Our Pricing Plans</h2>
+        <div class="our-pricing-plans">
+
             <div class="pricing-plan">
-                <h3>A day only Pass</h3>
+                <h3>One Day Pass</h3>
                 <p>Access to gym facilities</p>
                 <div class="price">$29/day</div>
                 <a href="signup.php" class="button">Sign Up</a>
             </div>
-            <!-- Plan 2 -->
+     
             <div class="pricing-plan">
                 <h3>Weekly</h3>
                 <p>Access to gym + personal training</p>
                 <div class="price">$59/week</div>
                 <a href="signup.php" class="button">Sign Up</a>
             </div>
-            <!-- Plan 3 -->
+           
             <div class="pricing-plan">
                 <h3>Monthly</h3>
                 <p>Unlimited access + all services</p>
@@ -68,9 +73,18 @@ session_start();
         </div>
     </section>
 
-    <!-- naglagay me partners/sponsors-->
-    <section class ="Partners" id ="partners">
-        <h2>Our Parners</h2>
+
+
+    <!--sa img mga 1x1 nyo-->
+    <section class ="Creators" id ="partners">
+        <h2>The Creators</h2>
+        <div class="pictures">
+            <img src="" alt="">
+            <img src="" alt="">
+            <img src="" alt="">
+            <img src="" alt="">
+            <img src="" alt="">
+        </div>
     </section>
 
     <section class = "Contacts" id ="contact">
