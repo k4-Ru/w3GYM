@@ -64,6 +64,11 @@ $members = $stmt->fetchAll();
             <button type="submit" style="padding: 5px;">Find</button>
         </form>
 
+        <?php if (isset($_GET['status']) && $_GET['status'] === 'success'): ?>
+        <div class="success">Status updated successfully!</div>
+        <?php endif; ?>
+
+
         <div class="DATA">
             <table border="1">
                 <thead>
@@ -110,18 +115,23 @@ $members = $stmt->fetchAll();
                                 <form action="delete_member.php" method="POST" style="display:inline;">
                                         <input type="hidden" name="member_id" value="<?php echo $member['id']; ?>">
                                         <button type="submit" onclick="return confirm('Are you sure you want to delete this member?');">Delete</button>
-                                    </form>
+                                </form>
 
                         
-                                    <form action="change_status.php" method="POST" style="display:inline;">
-                                        <input type="hidden" name="member_id" value="<?php echo $member['id']; ?>">
-                                        <select name="status" onchange="this.form.submit()">
-                                            <option value="" disabled selected>Status</option>
-                                            <option value="Active" <?php echo $member['status'] === 'Active' ? 'selected' : ''; ?>>Active</option>
-                                            <option value="Inactive" <?php echo $member['status'] === 'Inactive' ? 'selected' : ''; ?>>Inactive</option>
-                                            <option value="Disabled" <?php echo $member['status'] === 'Disabled' ? 'selected' : ''; ?>>Disabled</option>
-                                        </select>
-                                    </form>
+                                <form action="change_status.php" method="POST" style="display:inline;">
+    <input type="hidden" name="member_id" value="<?php echo $member['id']; ?>">
+    <select name="status" onchange="this.form.submit()">
+        <option value="Active" <?php echo ($member['status'] === 'Active' || $member['status'] === NULL) ? 'selected' : ''; ?>>Enable</option>
+        <option value="Disabled" <?php echo ($member['status'] === 'Disabled') ? 'selected' : ''; ?>>Disable</option>
+    </select>
+</form>
+
+
+
+
+
+
+
                                 </td>
                             </tr>
                         <?php endforeach; ?>

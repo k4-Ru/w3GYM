@@ -1,64 +1,29 @@
 <?php
 require 'db.php';
+
 session_start();
 
 if (!isset($_SESSION['id'])) {
     header('Location: login.php');
     exit;
 }
+$member_id = $_SESSION['id']; 
 
-$userId = $_SESSION['id'];
-$error = '';
-$success = '';
+$query = "SELECT username, status, membership_type, membership_start_date, membership_end_date FROM members WHERE id = :member_id";
+$stmt = $pdo->prepare($query);
+$stmt->execute([':member_id' => $member_id]);
+$member = $stmt->fetch();
 
-$stmt = $pdo->prepare("SELECT username, membership_type, membership_start_date, status, membership_end_date FROM members WHERE id = ?");
-$stmt->execute([$userId]);
-$user = $stmt->fetch();
-
-if ($user) {
-    $username = $user['username'];
-    $membership_type = $user['membership_type'];
-    $membership_start_date = $user['membership_start_date'];
-    $membership_end_date = $user['membership_end_date'];
-
-    $currentDate = date('Y-m-d');
-    if ($membership_end_date && $currentDate > $membership_end_date) {
-        $status = 'expired';
-
-        $stmt = $pdo->prepare("UPDATE members SET status = ? WHERE id = ?");
-        $stmt->execute(['expired', $userId]);
-    }
-    $status = $user['status'];
-} else {
-    $error = "User data not found.";
-    $username = '';
-    $status = '';
-    $membership_type = '';
-    $membership_start_date = '';
-    $membership_end_date = '';
+if (!$member) {
+    echo "Member not found.";
+    exit;
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $selectedPlan = $_POST['plan'] ?? null;
-
-    if (!$selectedPlan) {
-        $error = "Please select a plan.";
-    } else {
-        $stmt = $pdo->prepare("UPDATE members SET membership_type = ?, membership_start_date = CURRENT_DATE WHERE id = ?");
-        $stmt->execute([$selectedPlan, $userId]);
-
-        $success = "Your plan has been updated to '$selectedPlan'.";
-        $stmt = $pdo->prepare("SELECT membership_type, membership_start_date, membership_end_date FROM members WHERE id = ?");
-        $stmt->execute([$userId]);
-        $user = $stmt->fetch();
-
-        if ($user) {
-            $membership_type = $user['membership_type'];
-            $membership_start_date = $user['membership_start_date'];
-            $membership_end_date = $user['membership_end_date'];
-        }
-    }
-}
+$username = $member['username'];
+$status = $member['status'];
+$membership_type = $member['membership_type'];
+$membership_start_date = $member['membership_start_date'];
+$membership_end_date = $member['membership_end_date'];
 ?>
 
 <!DOCTYPE html>
@@ -78,20 +43,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <p>Start Date: <strong><?php echo htmlspecialchars($membership_start_date); ?></strong></p>
             <p>End Date: <strong><?php echo htmlspecialchars($membership_end_date); ?></strong></p>
 
-            <?php if ($error): ?>
-                <p style="color:red;"><?php echo $error; ?></p>
-            <?php elseif ($success): ?>
-                <p style="color:green;"><?php echo $success; ?></p>
+            <!-- pagawa ako kulay pula error message sa css-->
+            <?php if ($status === 'Disabled'): ?> 
+                <div class="error">You are currently disabled and cannot choose a membership plan. Contact an Admin.</div>
             <?php endif; ?>
 
-            <form method="POST">
+            <form action="change_membership.php" method="POST">
                 <h1>Select Your Membership Plan</h1>
 
                 <div class="plan-section">
                     <h2>One Day Pass</h2>
                     <p>Access to the gym for one day.</p>
                     <label>
-                        <input type="radio" name="plan" value="One Day" <?php echo ($membership_type === 'One Day') ? 'checked' : ''; ?>> Select
+                        <input type="radio" name="membership_type" value="One Day" <?php echo ($membership_type === 'One Day') ? 'checked' : ''; ?>> Select
                     </label>
                 </div>
 
@@ -99,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <h2>Weekly Plan</h2>
                     <p>Enjoy unlimited gym access for one week.</p>
                     <label>
-                        <input type="radio" name="plan" value="weekly" <?php echo ($membership_type === 'Weekly') ? 'checked' : ''; ?>> Select
+                        <input type="radio" name="membership_type" value="Weekly" <?php echo ($membership_type === 'Weekly') ? 'checked' : ''; ?>> Select
                     </label>
                 </div>
 
@@ -107,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <h2>Monthly Plan</h2>
                     <p>Unlimited access to the gym for a month.</p>
                     <label>
-                        <input type="radio" name="plan" value="monthly" <?php echo ($membership_type === 'Monthly') ? 'checked' : ''; ?>> Select
+                        <input type="radio" name="membership_type" value="Monthly" <?php echo ($membership_type === 'Monthly') ? 'checked' : ''; ?>> Select
                     </label>
                 </div>
 
@@ -115,11 +79,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <h2>Yearly Plan</h2>
                     <p>Enjoy the gym facilities for an entire year.</p>
                     <label>
-                        <input type="radio" name="plan" value="yearly" <?php echo ($membership_type === 'Yearly') ? 'checked' : ''; ?>> Select
+                        <input type="radio" name="membership_type" value="Yearly" <?php echo ($membership_type === 'Yearly') ? 'checked' : ''; ?>> Select
                     </label>
                 </div>
 
-                <button type="submit">Update Plan</button>
+                <?php if ($status !== 'Disabled'): ?>
+                    <button type="submit">Update Plan</button>
+                <?php endif; ?>
             </form>
 
             <form action="logout.php" method="POST" style="margin-top: 20px;">

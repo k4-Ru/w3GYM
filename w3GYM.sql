@@ -69,16 +69,16 @@ CREATE TABLE `members` (
   `phone` varchar(11) DEFAULT NULL,
   `join_date` date NOT NULL DEFAULT curdate(),
   `membership_type` enum('One Day','Weekly','Monthly','Yearly','Expired') DEFAULT NULL,
-  `membership_start_date` date DEFAULT curdate(),
+  `membership_start_date` date DEFAULT NULL,
   `membership_end_date` date GENERATED ALWAYS AS (case when `membership_type` = 'Monthly' then `membership_start_date` + interval 1 month when `membership_type` = 'Yearly' then `membership_start_date` + interval 1 year when `membership_type` = 'Weekly' then `membership_start_date` + interval 1 week when `membership_type` = 'One Day' then `membership_start_date` + interval 1 day else NULL end) STORED,
-  `status` enum('Active','Disabled') DEFAULT NULL,
+  `status` enum('Active','Disabled') NOT NULL DEFAULT 'Active',
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `password` (`password`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `phone` (`phone`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -87,7 +87,7 @@ CREATE TABLE `members` (
 
 LOCK TABLES `members` WRITE;
 /*!40000 ALTER TABLE `members` DISABLE KEYS */;
-INSERT INTO `members` (`id`, `first_name`, `middle_name`, `last_name`, `username`, `password`, `email`, `phone`, `join_date`, `membership_type`, `membership_start_date`, `status`, `updated_at`) VALUES (1,'Juan','','Dela Cruz','juanDC_123','$2y$10$PGAYsX05ygyplT7i7JvJbO1G9Xruwwn6vdihYWXyyMolUHTupfVIS','juanDC@gmail.com','09877812431','2024-12-11','One Day','2024-12-12','Active','2024-12-11 16:27:27');
+INSERT INTO `members` (`id`, `first_name`, `middle_name`, `last_name`, `username`, `password`, `email`, `phone`, `join_date`, `membership_type`, `membership_start_date`, `status`, `updated_at`) VALUES (1,'Juan','','Dela Cruz','juanDC_123','$2y$10$PGAYsX05ygyplT7i7JvJbO1G9Xruwwn6vdihYWXyyMolUHTupfVIS','juanDC@gmail.com','09877812431','2024-12-11','One Day','2024-12-14','Active','2024-12-14 00:09:25'),(5,'Sophia','Mae','Chavez','sop_CHA34','$2y$10$eB1/l4LtFsECrIfbAZa.XeifocTvV4t5rR6BjLZq2iGAlBvcTOskK','sop_CHA@gmail.com','09587657433','2024-12-14',NULL,NULL,'','2024-12-13 22:58:42');
 /*!40000 ALTER TABLE `members` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -100,4 +100,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-12  0:31:44
+-- Dump completed on 2024-12-14  8:12:58
