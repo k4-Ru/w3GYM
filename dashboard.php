@@ -119,17 +119,12 @@ $members = $stmt->fetchAll();
 
                         
                                 <form action="change_status.php" method="POST" style="display:inline;">
-    <input type="hidden" name="member_id" value="<?php echo $member['id']; ?>">
-    <select name="status" onchange="this.form.submit()">
-        <option value="Active" <?php echo ($member['status'] === 'Active' || $member['status'] === NULL) ? 'selected' : ''; ?>>Enable</option>
-        <option value="Disabled" <?php echo ($member['status'] === 'Disabled') ? 'selected' : ''; ?>>Disable</option>
-    </select>
-</form>
-
-
-
-
-
+                                    <input type="hidden" name="member_id" value="<?php echo $member['id']; ?>">
+                                    <select name="status" onchange="this.form.submit()">
+                                        <option value="Active" <?php echo ($member['status'] === 'Active' || $member['status'] === NULL) ? 'selected' : ''; ?>>Enable</option>
+                                        <option value="Disabled" <?php echo ($member['status'] === 'Disabled') ? 'selected' : ''; ?>>Disable</option>
+                                    </select>
+                                </form>
 
 
                                 </td>
