@@ -25,7 +25,7 @@ $membership_start_date = $member['membership_start_date'];
 $membership_end_date = $member['membership_end_date'];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $membership_type = $_POST['membership_type'];
+    $membership_type = $_POST['plan'];
 
     if ($status === 'Disabled') {
         $_SESSION['status'] = 'disabled';

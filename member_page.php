@@ -37,51 +37,47 @@ $membership_end_date = $member['membership_end_date'];
 <body>
     <div class="form-container">
         <div class="form-box">
-            <header>Good Day, <?php echo htmlspecialchars($username); ?>!</header>
-            <p>Status: <strong><?php echo htmlspecialchars($status); ?></strong></p>
-            <p>Current Plan: <strong><?php echo htmlspecialchars($membership_type); ?></strong></p>
-            <p>Start Date: <strong><?php echo htmlspecialchars($membership_start_date); ?></strong></p>
-            <p>End Date: <strong><?php echo htmlspecialchars($membership_end_date); ?></strong></p>
+            <div class="greeting">Good Day, <?php echo htmlspecialchars($username); ?>!</div>
+            <p class ="status">Status: <strong><?php echo htmlspecialchars($status); ?></strong></p>
+            <p class ="current-plan">Current Plan: <strong><?php echo htmlspecialchars($membership_type); ?></strong></p>
+            <p class ="start-date">Start Date: <strong><?php echo htmlspecialchars($membership_start_date); ?></strong></p>
+            <p class ="end-date">End Date: <strong><?php echo htmlspecialchars($membership_end_date); ?></strong></p>
 
             <!-- pagawa ako kulay pula error message sa css-->
             <?php if ($status === 'Disabled'): ?> 
-                <div class="error">You are currently disabled and cannot choose a membership plan. Contact an Admin.</div>
+                <p class="disabled-message">You are currently disabled and cannot choose a membership plan. Contact an Admin.</p>
             <?php endif; ?>
 
             <form action="change_membership.php" method="POST">
-                <h1>Select Your Membership Plan</h1>
+            <h2 class="select-plan-header">Select Your Membership Plan</h2> 
 
-                <div class="plan-section">
-                    <h2>One Day Pass</h2>
-                    <p>Access to the gym for one day.</p>
-                    <label>
-                        <input type="radio" name="membership_type" value="One Day" <?php echo ($membership_type === 'One Day') ? 'checked' : ''; ?>> Select
-                    </label>
-                </div>
+            <div class="plan-section plan-bronze">
+    <h2>One Day Pass ₱69/day</h2>
+    <p>Enjoy full access to all gym facilities for a single day.</p>
+    <input type="radio" id="plan-one-day" name="plan" value="One Day" <?php echo ($membership_type === 'One Day') ? 'checked' : ''; ?>>
+    <label for="plan-one-day" class="radio-label">Select</label>
+</div>
 
-                <div class="plan-section">
-                    <h2>Weekly Plan</h2>
-                    <p>Enjoy unlimited gym access for one week.</p>
-                    <label>
-                        <input type="radio" name="membership_type" value="Weekly" <?php echo ($membership_type === 'Weekly') ? 'checked' : ''; ?>> Select
-                    </label>
-                </div>
+<div class="plan-section plan-silver">
+    <h2>Weekly Plan ₱369/week </h2>
+    <p>Get a week's worth of unlimited access to the gym, ideal for short-term fitness goals.</p>
+    <input type="radio" id="plan-weekly" name="plan" value="Weekly" <?php echo ($membership_type === 'Weekly') ? 'checked' : ''; ?>>
+    <label for="plan-weekly" class="radio-label">Select</label>
+</div>
 
-                <div class="plan-section">
-                    <h2>Monthly Plan</h2>
-                    <p>Unlimited access to the gym for a month.</p>
-                    <label>
-                        <input type="radio" name="membership_type" value="Monthly" <?php echo ($membership_type === 'Monthly') ? 'checked' : ''; ?>> Select
-                    </label>
-                </div>
+<div class="plan-section plan-gold">
+    <h2>Monthly Plan ₱1369/month </h2>
+    <p>Perfect for consistent workouts, offering access for 30 days with flexible renewal options</p>
+    <input type="radio" id="plan-monthly" name="plan" value="Monthly" <?php echo ($membership_type === 'Monthly') ? 'checked' : ''; ?>>
+    <label for="plan-monthly" class="radio-label">Select</label>
+</div>
 
-                <div class="plan-section">
-                    <h2>Yearly Plan</h2>
-                    <p>Enjoy the gym facilities for an entire year.</p>
-                    <label>
-                        <input type="radio" name="membership_type" value="Yearly" <?php echo ($membership_type === 'Yearly') ? 'checked' : ''; ?>> Select
-                    </label>
-                </div>
+<div class="plan-section plan-diamond">
+    <h2>Yearly Plan ₱13,699/year </h2>
+    <p>Save with a full-year commitment, providing unlimted access for 12 months at best rate</p>
+    <input type="radio" id="plan-yearly" name="plan" value="Yearly" <?php echo ($membership_type === 'Yearly') ? 'checked' : ''; ?>>
+    <label for="plan-yearly" class="radio-label">Select</label>
+</div>
 
                 <?php if ($status !== 'Disabled'): ?>
                     <button type="submit">Update Plan</button>
